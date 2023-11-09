@@ -36,8 +36,21 @@ most_frequent_method = {}
 for state in df['Location'].unique():
     most_frequent_method[state] = df[df['Location'] == state]['Payment Method'].value_counts().index[0]
 
+def find_pop_payment(state):
+    payment_methods = df['Payment Method'].unique()
+    us_state = df[df.Location == state]
 
-print(most_frequent_method['New York'])
+    most_frequent_method = {}
+
+    for method in payment_methods:
+        most_frequent_method[method] = len(us_state[us_state['Payment Method'] == method])
+
+    print(most_frequent_method)
+
+find_pop_payment("New York")
+
+
+# print(most_frequent_method['New York'])
 
 # Write this updated data out to csv file
-df.to_csv('data/processed/cleaned_data.csv', index=False)
+# df.to_csv('data/processed/cleaned_data.csv', index=False)
